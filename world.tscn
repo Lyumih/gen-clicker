@@ -1,0 +1,71 @@
+[gd_scene load_steps=2 format=3 uid="uid://cq5nf3y4spvkr"]
+
+[ext_resource type="Script" path="res://world.gd" id="1_lnosj"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_lnosj")
+hero = {
+"attack": {
+"cost_up": 4,
+"level": 1,
+"value": 2
+},
+"attack_speed": {
+"cost_up": 10,
+"level": 1,
+"value": 1.0
+},
+"gold": 500
+}
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Attack" type="Button" parent="."]
+unique_name_in_owner = true
+offset_left = 202.0
+offset_top = 207.0
+offset_right = 376.0
+offset_bottom = 327.0
+text = "Атака 2"
+
+[node name="InfoPlayer" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 207.0
+offset_top = 145.0
+offset_right = 360.0
+offset_bottom = 168.0
+text = "Золото: 12. Атака 3"
+
+[node name="Enemy" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 568.0
+offset_top = 202.0
+offset_right = 660.0
+offset_bottom = 251.0
+text = "Враг.
+Здоровье 5"
+
+[node name="UpgradesBox" type="VBoxContainer" parent="."]
+offset_left = 198.0
+offset_top = 396.0
+offset_right = 461.0
+offset_bottom = 508.0
+
+[node name="UpAttack" type="Button" parent="UpgradesBox"]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+text = "Прокачать атаку +1.
+Золото 2."
+
+[node name="UpAttackTime" type="Button" parent="UpgradesBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Прокачать скорость атаки +0.1.
+Золото 10"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="button_down" from="Attack" to="." method="_on_attack_button_down"]
+[connection signal="button_down" from="UpgradesBox/UpAttack" to="." method="_on_up_attack_button_down"]
+[connection signal="button_down" from="UpgradesBox/UpAttackTime" to="." method="_on_up_attack_time_button_down"]
